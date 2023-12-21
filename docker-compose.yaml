@@ -8,6 +8,6 @@ services:
     volumes:
       - mlflow-data:/mlflow
     environment:
-      - MLFLOW_HOME=/mlflow
+      - MLFLOW_BACKEND_STORE_URI=file:///mlflow
 volumes:
   mlflow-data:
