@@ -1,0 +1,7 @@
+[tool.ruff]
+
+target-version = "py312"
+
+[tool.ruff.lint]
+# only fix imports (atm, but maybe someone wants more)
+select = ["F401"]

@@ -1,13 +1,12 @@
-import mlflow
-from mlflow.models import infer_signature
-
-import pandas as pd
-from sklearn import datasets
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score, make_scorer, precision_score, recall_score, f1_score
 from functools import partial
 
+import mlflow
+import pandas as pd
+from mlflow.models import infer_signature
+from sklearn import datasets
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
+from sklearn.model_selection import train_test_split
 
 mlflow.set_tracking_uri(uri="http://localhost:8080")
 
@@ -37,7 +36,12 @@ if __name__ == "__main__":
     y_pred = lr.predict(X_test)
 
     # Calculate metrics
-    metrics_skeleton = [("accuracy", accuracy_score), ("precision", partial(precision_score, average="micro")), ("recall", partial(recall_score, average="micro")), ("f1", partial(f1_score, average="micro"))]
+    metrics_skeleton = [
+        ("accuracy", accuracy_score),
+        ("precision", partial(precision_score, average="micro")),
+        ("recall", partial(recall_score, average="micro")),
+        ("f1", partial(f1_score, average="micro")),
+    ]
     metrics = {key: m(y_test, y_pred) for key, m in metrics_skeleton}
     print(metrics)
 
